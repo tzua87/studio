@@ -10,9 +10,10 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { explainConcept, type ExplainConceptOutput } from '@/ai/flows/ai-concept-explanation';
+import { type ExplainConceptOutput } from '@/ai/flows/ai-concept-explanation';
 import { Skeleton } from './ui/skeleton';
 import { Sparkles } from 'lucide-react';
+import { explainConceptAction } from '@/app/actions/explain-concept';
 
 const formSchema = z.object({
   topic: z.string().min(3, 'Please enter a topic with at least 3 characters.'),
@@ -31,16 +32,6 @@ export default function ConceptExplainer() {
       topic: '',
     },
   });
-
-  async function explainConceptAction(topic: string): Promise<ExplainConceptOutput | null> {
-    'use server';
-    try {
-      return await explainConcept({ topic });
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  }
 
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);

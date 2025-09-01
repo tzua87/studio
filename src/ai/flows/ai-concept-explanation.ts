@@ -33,25 +33,10 @@ const prompt = ai.definePrompt({
   output: {schema: ExplainConceptOutputSchema},
   prompt: `You are an AI assistant designed to help 9th-grade students understand complex topics in Physics, Chemistry, and Math.
 
-  A student is struggling with the following topic:
-  {{topic}}
+A student is struggling with the following topic:
+{{topic}}
 
-  Provide a simplified explanation of the topic, a practice quiz to test their understanding, and suggestions for further exploration.
-
-  Explanation:
-  ```
-  {{explanation}}
-  ```
-
-  Quiz:
-  ```
-  {{quiz}}
-  ```
-
-  Further Exploration:
-  ```
-  {{furtherExploration}}
-  ````,
+Provide a simplified explanation of the topic, a practice quiz to test their understanding, and suggestions for further exploration.`,
 });
 
 const explainConceptFlow = ai.defineFlow(
