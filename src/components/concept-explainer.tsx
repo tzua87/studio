@@ -1,9 +1,11 @@
+
 'use client';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import ReactMarkdown from 'react-markdown';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -95,19 +97,19 @@ export default function ConceptExplainer() {
                     <AccordionItem value="explanation">
                         <AccordionTrigger className="text-lg font-headline">Explanation</AccordionTrigger>
                         <AccordionContent className="prose prose-sm max-w-none text-foreground">
-                        <div dangerouslySetInnerHTML={{ __html: result.explanation.replace(/```/g, '').replace(/\n/g, '<br/>') }}/>
+                          <ReactMarkdown>{result.explanation}</ReactMarkdown>
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="quiz">
                         <AccordionTrigger className="text-lg font-headline">Practice Quiz</AccordionTrigger>
                         <AccordionContent className="prose prose-sm max-w-none text-foreground">
-                        <div dangerouslySetInnerHTML={{ __html: result.quiz.replace(/```/g, '').replace(/\n/g, '<br/>') }}/>
+                          <ReactMarkdown>{result.quiz}</ReactMarkdown>
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="exploration">
                         <AccordionTrigger className="text-lg font-headline">Further Exploration</AccordionTrigger>
                         <AccordionContent className="prose prose-sm max-w-none text-foreground">
-                        <div dangerouslySetInnerHTML={{ __html: result.furtherExploration.replace(/```/g, '').replace(/\n/g, '<br/>') }}/>
+                          <ReactMarkdown>{result.furtherExploration}</ReactMarkdown>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
