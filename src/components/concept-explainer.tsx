@@ -16,6 +16,7 @@ import { type ExplainConceptOutput } from '@/ai/flows/ai-concept-explanation';
 import { Skeleton } from './ui/skeleton';
 import { Sparkles } from 'lucide-react';
 import { explainConceptAction } from '@/app/actions/explain-concept';
+import { InteractiveQuiz } from './interactive-quiz';
 
 const formSchema = z.object({
   topic: z.string().min(3, 'Please enter a topic with at least 3 characters.'),
@@ -102,8 +103,8 @@ export default function ConceptExplainer() {
                     </AccordionItem>
                     <AccordionItem value="quiz">
                         <AccordionTrigger className="text-lg font-headline">Practice Quiz</AccordionTrigger>
-                        <AccordionContent className="prose prose-sm max-w-none text-foreground">
-                          <ReactMarkdown>{result.quiz}</ReactMarkdown>
+                        <AccordionContent>
+                          <InteractiveQuiz questions={result.quiz} />
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="exploration">
