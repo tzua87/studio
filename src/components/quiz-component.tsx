@@ -100,26 +100,28 @@ export default function QuizComponent({ subjectSlug, subjectName }: QuizComponen
       <CardContent>
         <p className="font-semibold text-lg mb-6">{currentQuestion.question}</p>
         <RadioGroup onValueChange={handleAnswerSelect} value={selectedAnswer} disabled={isAnswered}>
+          <div className="space-y-3">
           {currentQuestion.options.map((option: string) => {
             const isCorrect = option === currentQuestion.answer;
             const isSelected = option === selectedAnswer;
             
             const getOptionClass = () => {
-              if (!isAnswered) return "has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-colors";
+              if (!isAnswered) return "hover:bg-muted/50 cursor-pointer";
               if (isSelected && !isCorrect) return "bg-red-100 dark:bg-red-900/30 border-red-300 dark:border-red-700 text-red-800 dark:text-red-200";
               if (isCorrect) return "bg-green-100 dark:bg-green-900/30 border-green-300 dark:border-green-700 text-green-800 dark:text-green-200";
               return "border-border";
             }
 
             return (
-                <div key={option} className={cn("flex items-center space-x-3 p-3 border rounded-md", getOptionClass())}>
+              <Label key={option} htmlFor={option} className={cn("flex items-center space-x-3 p-3 border rounded-md transition-colors", getOptionClass())}>
                   <RadioGroupItem value={option} id={option} className="!text-current" />
-                  <Label htmlFor={option} className="text-base flex-1 cursor-pointer">{option}</Label>
+                  <span className="text-base flex-1">{option}</span>
                   {isAnswered && isSelected && !isCorrect && <X className="w-5 h-5 text-red-600" />}
                   {isAnswered && isCorrect && <Check className="w-5 h-5 text-green-600" />}
-                </div>
+              </Label>
             )
           })}
+          </div>
         </RadioGroup>
       </CardContent>
       <CardFooter>
