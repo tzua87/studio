@@ -30,8 +30,8 @@ const PersonalizedRecommendationsOutputSchema = z.object({
   recommendations: z
     .string()
     .describe(
-      'Personalized study recommendations based on the student performance data.
-      Example: Based on your quiz performance, it is recommended that you focus on Chemistry, particularly Atomic Structure, and review Physics Kinematics concepts.  Consider additional practice quizzes in these areas.'
+      `Personalized study recommendations based on the student performance data.
+      Example: Based on your quiz performance, it is recommended that you focus on Chemistry, particularly Atomic Structure, and review Physics Kinematics concepts.  Consider additional practice quizzes in these areas.`
     ),
 });
 
@@ -55,7 +55,7 @@ const prompt = ai.definePrompt({
 
   Quiz Performance Data: {{{quizPerformanceData}}}
 
-  Recommendations:`, // No Handlebars logic, just string.
+  Recommendations:`,
 });
 
 const personalizedRecommendationsFlow = ai.defineFlow(
