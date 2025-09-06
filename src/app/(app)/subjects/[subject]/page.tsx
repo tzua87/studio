@@ -26,7 +26,8 @@ const getSubject = (slug: string): Subject | undefined => {
 };
 
 
-export default function SubjectPage({ params: { subject: subjectSlug } }: { params: { subject: string } }) {
+export default function SubjectPage({ params }: { params: { subject: string } }) {
+  const { subject: subjectSlug } = params;
   const [explanation, setExplanation] = useState<ExplainConceptOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
