@@ -61,18 +61,18 @@ export default function SubjectPage({ params }: { params: { subject: string } })
   const Icon = subject.icon;
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <div className="flex items-center gap-4 mb-8">
+    <div className="p-4 sm:p-6">
+      <div className="flex items-center gap-4 mb-6">
         <div className="p-3 bg-primary/10 rounded-lg">
-            <Icon className="w-8 h-8 text-primary" />
+            <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
         </div>
         <div>
-            <h1 className="text-3xl font-bold font-headline tracking-tight">{subject.name}</h1>
-            <p className="text-muted-foreground">{subject.description}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold font-headline tracking-tight">{subject.name}</h1>
+            <p className="text-muted-foreground text-sm sm:text-base">{subject.description}</p>
         </div>
       </div>
       
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
             <Card>
                 <CardHeader>
@@ -83,10 +83,10 @@ export default function SubjectPage({ params }: { params: { subject: string } })
                     <Accordion type="single" collapsible className="w-full">
                     {subject.lessons.map((lesson, index) => (
                         <AccordionItem value={`item-${index}`} key={index}>
-                          <AccordionTrigger className="font-semibold">{lesson.title}</AccordionTrigger>
+                          <AccordionTrigger className="font-semibold text-left">{lesson.title}</AccordionTrigger>
                           <AccordionContent>
                             <div className="flex flex-col items-start gap-4">
-                              <p>{lesson.content}</p>
+                              <p className="text-sm sm:text-base">{lesson.content}</p>
                               <Button variant="outline" size="sm" onClick={() => handleExplainClick(lesson.title)}>
                                 <Sparkles className="mr-2 h-4 w-4" />
                                 Explain with AI
@@ -101,7 +101,7 @@ export default function SubjectPage({ params }: { params: { subject: string } })
         </div>
         
         <div className="md:col-span-1">
-            <Card className="bg-primary/10 border-primary/20 sticky top-8">
+            <Card className="bg-primary/10 border-primary/20 md:sticky top-8">
                  <CardHeader>
                     <CardTitle className="font-headline text-primary">Test Your Knowledge</CardTitle>
                     <CardDescription className="text-primary/80">Ready to see what you've learned? Take a practice quiz.</CardDescription>
@@ -118,13 +118,13 @@ export default function SubjectPage({ params }: { params: { subject: string } })
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
-        <DialogContent className="max-w-2xl h-[90vh] flex flex-col">
+        <DialogContent className="max-w-2xl w-[95vw] h-[90vh] flex flex-col">
           <DialogHeader>
-            <DialogTitle className="font-headline">
+            <DialogTitle className="font-headline text-lg sm:text-xl">
               AI Explanation: {selectedTopic}
             </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 overflow-y-auto pr-4">
+          <div className="flex-1 overflow-y-auto pr-2 sm:pr-4 -mr-2 sm:-mr-4">
             {isLoading && (
               <div className="mt-6 space-y-4">
                 <Skeleton className="h-10 w-full" />
@@ -138,19 +138,19 @@ export default function SubjectPage({ params }: { params: { subject: string } })
             {explanation && (
                 <Accordion type="multiple" defaultValue={['explanation', 'quiz', 'exploration']} className="w-full">
                     <AccordionItem value="explanation">
-                        <AccordionTrigger className="text-lg font-headline">Explanation</AccordionTrigger>
+                        <AccordionTrigger className="text-base sm:text-lg font-headline">Explanation</AccordionTrigger>
                         <AccordionContent className="prose prose-sm max-w-none text-foreground">
                           <ReactMarkdown>{explanation.explanation}</ReactMarkdown>
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="quiz">
-                        <AccordionTrigger className="text-lg font-headline">Practice Quiz</AccordionTrigger>
+                        <AccordionTrigger className="text-base sm:text-lg font-headline">Practice Quiz</AccordionTrigger>
                         <AccordionContent>
                           <InteractiveQuiz questions={explanation.quiz} />
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="exploration">
-                        <AccordionTrigger className="text-lg font-headline">Further Exploration</AccordionTrigger>
+                        <AccordionTrigger className="text-base sm:text-lg font-headline">Further Exploration</AccordionTrigger>
                         <AccordionContent className="prose prose-sm max-w-none text-foreground">
                           <ReactMarkdown>{explanation.furtherExploration}</ReactMarkdown>
                         </AccordionContent>

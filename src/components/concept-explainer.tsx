@@ -54,7 +54,7 @@ export default function ConceptExplainer() {
   return (
     <div className="max-w-2xl">
       <Card className="shadow-sm">
-        <CardContent className="p-6">
+        <CardContent className="p-4 sm:p-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-start gap-2">
               <FormField
@@ -63,15 +63,15 @@ export default function ConceptExplainer() {
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormControl>
-                      <Input placeholder="e.g., Photosynthesis, Pythagorean Theorem, Newton's Second Law" {...field} />
+                      <Input placeholder="e.g., Photosynthesis" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={isLoading} size="default">
                 <Sparkles className="mr-2 h-4 w-4"/>
-                {isLoading ? 'Explaining...' : 'Explain'}
+                {isLoading ? '...' : 'Explain'}
               </Button>
             </form>
           </Form>

@@ -20,7 +20,7 @@ export default function QuizPage({ params: { subject: subjectSlug } }: { params:
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 flex justify-center items-start min-h-screen">
+    <div className="p-2 sm:p-4 md:p-6 flex justify-center items-start min-h-screen">
       <QuizComponent subjectSlug={subjectSlug as 'physics' | 'chemistry' | 'math'} subjectName={subject.name} />
     </div>
   );
