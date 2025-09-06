@@ -25,7 +25,7 @@ const QuizQuestionSchema = z.object({
 
 const ExplainConceptOutputSchema = z.object({
   explanation: z.string().describe('A simplified explanation of the topic.'),
-  quiz: z.array(QuizQuestionSchema).describe('A practice quiz with multiple choice questions related to the topic.'),
+  quiz: z.array(QuizQuestionSchema).describe('A practice quiz with 3-5 multiple-choice questions related to the topic.'),
   furtherExploration: z.string().describe('Suggestions for further exploration of the topic.'),
 });
 export type ExplainConceptOutput = z.infer<typeof ExplainConceptOutputSchema>;
