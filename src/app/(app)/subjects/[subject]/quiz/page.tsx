@@ -8,12 +8,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function QuizPage({ params }: { params: { subject: string } }) {
-  if (!QUIZZES[params.subject]) {
+export default function QuizPage({ params: { subject: subjectSlug } }: { params: { subject: string } }) {
+  if (!QUIZZES[subjectSlug]) {
     notFound();
   }
 
-  const subject = SUBJECTS.find(s => s.slug === params.subject);
+  const subject = SUBJECTS.find(s => s.slug === subjectSlug);
 
   if (!subject) {
       notFound();
@@ -21,7 +21,7 @@ export default function QuizPage({ params }: { params: { subject: string } }) {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 flex justify-center items-start min-h-screen">
-      <QuizComponent subjectSlug={params.subject as 'physics' | 'chemistry' | 'math'} subjectName={subject.name} />
+      <QuizComponent subjectSlug={subjectSlug as 'physics' | 'chemistry' | 'math'} subjectName={subject.name} />
     </div>
   );
 }

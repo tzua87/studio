@@ -26,14 +26,14 @@ const getSubject = (slug: string): Subject | undefined => {
 };
 
 
-export default function SubjectPage({ params }: { params: { subject: string } }) {
+export default function SubjectPage({ params: { subject: subjectSlug } }: { params: { subject: string } }) {
   const [explanation, setExplanation] = useState<ExplainConceptOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
 
-  const subject = getSubject(params.subject);
+  const subject = getSubject(subjectSlug);
 
   if (!subject) {
     notFound();
