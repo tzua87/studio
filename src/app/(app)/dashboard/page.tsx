@@ -7,7 +7,7 @@ export default function DashboardPage() {
   return (
     <div className="p-4 sm:p-6">
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold font-headline tracking-tight">Welcome to NexusLearn</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold font-headline tracking-tight">Welcome to SHIVA-AI</h1>
         <p className="text-sm sm:text-base text-muted-foreground">Your personalized journey to mastering 9th-grade science and math begins here.</p>
       </div>
 

@@ -3,7 +3,8 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BrainCircuit, BookOpen, ChevronDown, LayoutDashboard, Lightbulb } from 'lucide-react';
+import { BookOpen, ChevronDown, LayoutDashboard, Lightbulb } from 'lucide-react';
+import { ShivaAILogo } from './logo';
 
 import { cn } from '@/lib/utils';
 import {
@@ -33,10 +34,10 @@ export function AppSidebar() {
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" asChild>
             <Link href="/dashboard">
-              <BrainCircuit />
+              <ShivaAILogo className="w-8 h-8" />
             </Link>
           </Button>
-          <h1 className="text-lg font-semibold font-headline">NexusLearn</h1>
+          <h1 className="text-lg font-semibold font-headline">SHIVA-AI</h1>
           <div className="grow" />
           <SidebarTrigger className="hidden md:flex" />
         </div>

@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'NexusLearn',
+  title: 'SHIVA-AI',
   description: 'An adaptive personalized learning app.',
 };
 
