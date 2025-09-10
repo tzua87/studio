@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { QUIZZES } from '@/lib/data';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from '@/components/ui/card';
@@ -24,11 +24,24 @@ export default function QuizComponent({ subjectSlug, subjectName }: QuizComponen
   const [quizFinished, setQuizFinished] = useState(false);
 
   const score = useMemo(() => {
-    if (!quizFinished) return 0;
     return quiz.questions.reduce((acc, question, index) => {
       return selectedAnswers[index] === question.answer ? acc + 1 : acc;
     }, 0);
-  }, [quizFinished, selectedAnswers, quiz.questions]);
+  }, [selectedAnswers, quiz.questions]);
+
+  useEffect(() => {
+    if (quizFinished) {
+      const percentage = Math.round((score / quiz.questions.length) * 100);
+      try {
+        const storedScores = localStorage.getItem('quizScores');
+        const scores = storedScores ? JSON.parse(storedScores) : {};
+        scores[subjectSlug] = percentage;
+        localStorage.setItem('quizScores', JSON.stringify(scores));
+      } catch (error) {
+        console.error("Failed to save scores to localStorage", error);
+      }
+    }
+  }, [quizFinished, score, subjectSlug, quiz.questions.length]);
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quiz.questions.length - 1) {

@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
@@ -8,11 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from './ui/skeleton';
 import { Lightbulb } from 'lucide-react';
 import { getRecommendationsAction } from '@/app/actions/get-recommendations';
+import { SUBJECTS } from '@/lib/data';
 
 const initialChartData = [
-  { subject: 'Physics', score: 70 },
-  { subject: 'Chemistry', score: 50 },
-  { subject: 'Math', score: 90 },
+  { subject: 'Physics', score: 0 },
+  { subject: 'Chemistry', score: 0 },
+  { subject: 'Math', score: 0 },
 ];
 
 const chartConfig = {
@@ -23,9 +25,38 @@ const chartConfig = {
 };
 
 export default function ProgressAnalytics() {
-  const [chartData] = useState(initialChartData);
+  const [chartData, setChartData] = useState(initialChartData);
   const [recommendation, setRecommendation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    try {
+      const storedScores = localStorage.getItem('quizScores');
+      if (storedScores) {
+        const scores = JSON.parse(storedScores);
+        const newChartData = SUBJECTS.map(subject => ({
+          subject: subject.name,
+          score: scores[subject.slug] || 0,
+        }));
+        setChartData(newChartData);
+      } else {
+        const defaultScores = { physics: 70, chemistry: 50, math: 90 };
+        const newChartData = SUBJECTS.map(subject => ({
+          subject: subject.name,
+          score: defaultScores[subject.slug] || 0,
+        }));
+        setChartData(newChartData);
+      }
+    } catch (error) {
+      console.error("Failed to parse scores from localStorage", error);
+      const defaultScores = { physics: 70, chemistry: 50, math: 90 };
+      const newChartData = SUBJECTS.map(subject => ({
+          subject: subject.name,
+          score: defaultScores[subject.slug] || 0,
+        }));
+      setChartData(newChartData);
+    }
+  }, []);
 
   const formattedPerformanceData = useMemo(() => {
     return chartData.map(item => `${item.subject}: ${item.score}%`).join(', ');
